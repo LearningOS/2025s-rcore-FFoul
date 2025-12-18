@@ -1,20 +1,8 @@
-//! The panic handler
+//os/src/lang_items.rs
 
-use crate::sbi::shutdown;
 use core::panic::PanicInfo;
 
 #[panic_handler]
-/// panic handler
-fn panic(info: &PanicInfo) -> ! {
-    if let Some(location) = info.location() {
-        println!(
-            "[kernel] Panicked at {}:{} {}",
-            location.file(),
-            location.line(),
-            info.message().unwrap()
-        );
-    } else {
-        println!("[kernel] Panicked: {}", info.message().unwrap());
-    }
-    shutdown()
+fn panic(_info: &PanicInfo) -> ! {
+    loop {}
 }
